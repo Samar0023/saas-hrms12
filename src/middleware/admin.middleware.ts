@@ -5,13 +5,13 @@ import { AuthRequest } from "./auth.middleware";
 const adminMiddleware = async (req:AuthRequest , res:Response , next:NextFunction) =>{
      try {
         if(!req.user.id){
-           return res.status(400).json({message:"User does'nt Exists"});
+           return res.status(401).json({message:"User does'nt Exists"});
         }
 
         const user =  await USER.findById(req.user.id);
 
         if(req.user.role !== "hr"  && req.user.role !== "admin" && req.user.role !== "manager" ){
-          return  res.status(400).json({message:"Unauthorized"});
+          return  res.status(403).json({message:"Unauthorized"});
         }
 
         next();

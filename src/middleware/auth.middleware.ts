@@ -12,7 +12,7 @@ export interface DecodedToken extends JwtPayload{
 
 export const authmiddleware = async(req:AuthRequest , res:Response , next:NextFunction):Promise <void> =>{
     try{
-      const token = req.cookies?.jwt;
+      const token = req.cookies?.token;
 
       if(!token){
         res.status(401).json({
